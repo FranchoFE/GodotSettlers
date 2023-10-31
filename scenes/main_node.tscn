@@ -1,17 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://ccynwjhgial5e"]
+[gd_scene load_steps=7 format=3 uid="uid://ccynwjhgial5e"]
 
 [ext_resource type="Script" path="res://scenes/main_node.gd" id="1_1g1ov"]
 [ext_resource type="PackedScene" uid="uid://bgs3rlyryu8km" path="res://scenes/player.tscn" id="1_iumip"]
-[ext_resource type="PackedScene" uid="uid://djq1axt168wia" path="res://scenes/otro_arbolito_en_escena.tscn" id="8_bqoqi"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ae3eq"]
-size = Vector3(100, 1, 100)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vnnt5"]
-albedo_color = Color(0, 0.247059, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ymowj"]
-material = SubResource("StandardMaterial3D_vnnt5")
+[ext_resource type="PackedScene" uid="uid://dbisgvahmypyc" path="res://scenes/floor_chunk.tscn" id="2_v74rt"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_vi510"]
 
@@ -22,7 +13,7 @@ sky_material = SubResource("PhysicalSkyMaterial_vi510")
 background_mode = 2
 sky = SubResource("Sky_sgnhi")
 sdfgi_enabled = true
-volumetric_fog_enabled = true
+fog_enabled = true
 volumetric_fog_density = 0.0174
 volumetric_fog_albedo = Color(1, 1, 0.945098, 1)
 
@@ -30,17 +21,6 @@ volumetric_fog_albedo = Color(1, 1, 0.945098, 1)
 script = ExtResource("1_1g1ov")
 
 [node name="World" type="Node3D" parent="."]
-
-[node name="Floor" type="StaticBody3D" parent="World"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.492849, 0)
-shape = SubResource("BoxShape3D_ae3eq")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor"]
-transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -0.492849, 0)
-mesh = SubResource("BoxMesh_ymowj")
-skeleton = NodePath("")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(0.796245, -0.47757, 0.371377, -0.112635, 0.486113, 0.866607, -0.594397, -0.731861, 0.333274, 20.6347, 6.12734, 0)
@@ -50,11 +30,10 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
 environment = SubResource("Environment_c18kk")
 
+[node name="FloorChunk1" parent="World" instance=ExtResource("2_v74rt")]
+
+[node name="FloorChunk2" parent="World" instance=ExtResource("2_v74rt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
+
 [node name="Player" parent="." instance=ExtResource("1_iumip")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.75261, 0)
-
-[node name="Tree1" parent="." instance=ExtResource("8_bqoqi")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 14.2945, 1.42358, 13.4315)
-
-[node name="Tree2" parent="." instance=ExtResource("8_bqoqi")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 11.5, 1.5, 0)

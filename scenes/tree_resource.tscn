@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://djq1axt168wia"]
 
-[ext_resource type="Script" path="res://scenes/otro_arbolito_en_escena.gd" id="1_dh1xq"]
+[ext_resource type="Script" path="res://scenes/tree_resource.gd" id="1_dh1xq"]
 [ext_resource type="ArrayMesh" uid="uid://c1fuiwy3ubqcp" path="res://assets/tree_thin_dark.obj" id="2_30tj2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_25ai5"]

@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://dl7p14wiagj5w"]
+
+[ext_resource type="Script" path="res://scenes/stone_resource.gd" id="1_aemh4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_25ai5"]
+size = Vector3(0.607775, 0.81672, 0.641043)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oeqnq"]
+size = Vector3(0.445881, 0.767607, 0.573009)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i4yjg"]
+
+[node name="StoneResource" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1_aemh4")
+pending_elements = 100
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.487188, 0)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.115824, 0)
+shape = SubResource("BoxShape3D_25ai5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.134807, -0.0100298)
+shape = SubResource("BoxShape3D_oeqnq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.272645, 0)
+mesh = SubResource("BoxMesh_i4yjg")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
