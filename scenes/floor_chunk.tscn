@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbisgvahmypyc"]
+[gd_scene load_steps=5 format=3 uid="uid://dbisgvahmypyc"]
 
-[ext_resource type="PackedScene" uid="uid://dl7p14wiagj5w" path="res://scenes/stone_resource.tscn" id="1_0ccyo"]
-[ext_resource type="PackedScene" uid="uid://djq1axt168wia" path="res://scenes/tree_resource.tscn" id="2_36lrx"]
+[ext_resource type="Script" path="res://scenes/floor_chunk.gd" id="1_w0hv3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lis7j"]
 size = Vector3(100, 1, 100)
@@ -13,6 +12,7 @@ albedo_color = Color(0, 0.247059, 0, 1)
 material = SubResource("StandardMaterial3D_vnnt5")
 
 [node name="FloorChunk" type="Node3D"]
+script = ExtResource("1_w0hv3")
 
 [node name="Floor" type="StaticBody3D" parent="."]
 
@@ -24,12 +24,3 @@ shape = SubResource("BoxShape3D_lis7j")
 transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -0.492849, 0)
 mesh = SubResource("BoxMesh_vfmos")
 skeleton = NodePath("")
-
-[node name="StoneResource" parent="." instance=ExtResource("1_0ccyo")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 5.15644, 1.03179, 5.13619)
-
-[node name="TreeResource" parent="." instance=ExtResource("2_36lrx")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -14.8888, 1.50225, 16.3381)
-
-[node name="TreeResource2" parent="." instance=ExtResource("2_36lrx")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 14.895, 1.453, -23.5691)

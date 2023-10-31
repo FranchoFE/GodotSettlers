@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dl7p14wiagj5w"]
+[gd_scene load_steps=6 format=3 uid="uid://dl7p14wiagj5w"]
 
 [ext_resource type="Script" path="res://scenes/stone_resource.gd" id="1_aemh4"]
+[ext_resource type="ArrayMesh" uid="uid://b7ug4sb1ug6m5" path="res://assets/stone_tallB.obj" id="2_mhuyt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_25ai5"]
 size = Vector3(0.607775, 0.81672, 0.641043)
@@ -31,7 +32,13 @@ shape = SubResource("BoxShape3D_oeqnq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.272645, 0)
+visible = false
 mesh = SubResource("BoxMesh_i4yjg")
+
+[node name="StoneTallB" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.00578731, -0.357018, 0.00763852)
+mesh = ExtResource("2_mhuyt")
+skeleton = NodePath("../../..")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

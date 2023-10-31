@@ -11,9 +11,10 @@ sky_material = SubResource("PhysicalSkyMaterial_vi510")
 
 [sub_resource type="Environment" id="Environment_c18kk"]
 background_mode = 2
+background_energy_multiplier = 2.23
 sky = SubResource("Sky_sgnhi")
+ambient_light_source = 3
 sdfgi_enabled = true
-fog_enabled = true
 volumetric_fog_density = 0.0174
 volumetric_fog_albedo = Color(1, 1, 0.945098, 1)
 
