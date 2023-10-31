@@ -53,8 +53,8 @@ environment = SubResource("Environment_c18kk")
 [node name="Player" parent="." instance=ExtResource("1_iumip")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.75261, 0)
 
-[node name="TreeResource" parent="." instance=ExtResource("8_bqoqi")]
+[node name="Tree1" parent="." instance=ExtResource("8_bqoqi")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 14.2945, 1.42358, 13.4315)
 
-[node name="OtroArbolitoEnEscena" parent="." instance=ExtResource("8_bqoqi")]
+[node name="Tree2" parent="." instance=ExtResource("8_bqoqi")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 11.5, 1.5, 0)
