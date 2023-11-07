@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://u34m6jtd4adf"]
+
+[ext_resource type="Script" path="res://scenes/worker_resource.gd" id="1_cyekq"]
+[ext_resource type="PackedScene" uid="uid://cy36aygvs66pn" path="res://models/gobot/gobot_skin.tscn" id="1_p1qcf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sbcyh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_demwj"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_o3f4k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bry0s"]
+albedo_color = Color(0.611765, 0.611765, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5gcoc"]
+albedo_color = Color(0.721569, 0.0509804, 0, 1)
+
+[node name="WorkerResource" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1_cyekq")
+metadata/worker = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.509087, 0)
+shape = SubResource("CapsuleShape3D_sbcyh")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="GobotSkin" parent="Area3D" instance=ExtResource("1_p1qcf")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_demwj")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="WSI_Selected" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 1.2, 0)
+visible = false
+mesh = SubResource("SphereMesh_o3f4k")
+skeleton = NodePath("../WSI_Working")
+surface_material_override/0 = SubResource("StandardMaterial3D_bry0s")
+
+[node name="WSI_Working" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 1.2, 0)
+visible = false
+mesh = SubResource("SphereMesh_o3f4k")
+surface_material_override/0 = SubResource("StandardMaterial3D_5gcoc")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

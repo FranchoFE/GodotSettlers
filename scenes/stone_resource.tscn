@@ -14,7 +14,6 @@ size = Vector3(0.445881, 0.767607, 0.573009)
 [node name="StoneResource" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("1_aemh4")
-pending_elements = 100
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.487188, 0)
@@ -40,5 +39,8 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.00578731, -0.357018, 
 mesh = ExtResource("2_mhuyt")
 skeleton = NodePath("../../..")
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
