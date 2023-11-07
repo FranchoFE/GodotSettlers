@@ -1,7 +1,7 @@
 extends Node
 
 var worker_scene = preload("res://scenes/worker_resource.tscn")
-var chunck_scene = preload("res://scenes/floor_chunk.tscn")
+var chunck_scene = preload("res://scenes/floor_chunk3.tscn")
 
 var stones = 0
 var trees = 0

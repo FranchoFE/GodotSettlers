@@ -3,7 +3,7 @@ extends Node3D
 @export var first_one = false
 var tree_resource_scene = preload("res://scenes/tree_resource.tscn")
 var stone_resource_scene = preload("res://scenes/stone_resource.tscn")
-var chunck_scene = preload("res://scenes/floor_chunk.tscn")
+var chunck_scene = preload("res://scenes/floor_chunk3.tscn")
 
 
 func _ready():
