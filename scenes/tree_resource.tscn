@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://djq1axt168wia"]
 
-[ext_resource type="Script" path="res://scenes/tree_resource.gd" id="1_dh1xq"]
+[ext_resource type="Script" path="res://scenes/stone_resource.gd" id="1_djno6"]
 [ext_resource type="ArrayMesh" uid="uid://c1fuiwy3ubqcp" path="res://assets/tree_thin_dark.obj" id="2_30tj2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_25ai5"]
@@ -11,7 +11,7 @@ size = Vector3(0.445881, 0.767607, 0.573009)
 
 [node name="TreeResource" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-script = ExtResource("1_dh1xq")
+script = ExtResource("1_djno6")
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.487188, 0)
@@ -32,5 +32,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0417175, -0.366278, 0.05419
 mesh = ExtResource("2_30tj2")
 skeleton = NodePath("../../..")
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

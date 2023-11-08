@@ -4,6 +4,7 @@ extends CharacterBody3D
 var target = null
 var mPlace_to_work = null
 var mResources = 0
+var mResource_type: String
 
 func _ready():
 	print("Creando trabajador")
@@ -46,7 +47,8 @@ func _go_to_start_point():
 	$Area3D/GobotSkin.run()
 	
 
-func add_resource():
+func add_resource(resource_type):
+	mResource_type = resource_type
 	mResources += 1
 	if mResources == 5:
 		_go_to_start_point()
@@ -65,7 +67,7 @@ func start_work():
 func give_resources_to_town():
 	var resources = mResources
 	if mResources != 0:
-		get_node("/root/MainNode").add_resources(resources)
+		get_node("/root/MainNode").add_resources(resources, mResource_type)
 		mResources = 0
 		target = mPlace_to_work
 		

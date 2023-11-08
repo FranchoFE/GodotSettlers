@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ccynwjhgial5e"]
+[gd_scene load_steps=9 format=3 uid="uid://ccynwjhgial5e"]
 
 [ext_resource type="Script" path="res://scenes/main_node.gd" id="1_1g1ov"]
 [ext_resource type="PackedScene" uid="uid://bgs3rlyryu8km" path="res://scenes/player.tscn" id="1_iumip"]
-[ext_resource type="PackedScene" uid="uid://dfnitv3c4uod8" path="res://scenes/floor_chunk3.tscn" id="2_52ix6"]
+[ext_resource type="PackedScene" uid="uid://bd7ay02h7aeg0" path="res://scenes/floor_chunks.tscn" id="2_3ytmi"]
 [ext_resource type="PackedScene" uid="uid://d11e226go4usx" path="res://scenes/main_town_building.tscn" id="4_op81c"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_vi510"]
@@ -19,6 +19,9 @@ sdfgi_enabled = true
 volumetric_fog_density = 0.0174
 volumetric_fog_albedo = Color(1, 1, 0.945098, 1)
 
+[sub_resource type="BoxMesh" id="BoxMesh_cgmrg"]
+size = Vector3(2, 0.2, 2)
+
 [node name="MainNode" type="Node"]
 script = ExtResource("1_1g1ov")
 
@@ -34,12 +37,21 @@ environment = SubResource("Environment_c18kk")
 
 [node name="FloorChunks" type="Node3D" parent="World"]
 
-[node name="FloorChunk_0_0" parent="World/FloorChunks" instance=ExtResource("2_52ix6")]
+[node name="FloorChunk_0_0" parent="World/FloorChunks" instance=ExtResource("2_3ytmi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+first_one = true
+
+[node name="NewBuildingMark" type="MeshInstance3D" parent="World/FloorChunks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3659, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_cgmrg")
 
 [node name="Player" parent="." instance=ExtResource("1_iumip")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.35012, 6.75261, 0)
 
-[node name="MainTownBuilding" parent="." instance=ExtResource("4_op81c")]
+[node name="Buildings" type="Node3D" parent="."]
+
+[node name="MainTownBuilding" parent="Buildings" instance=ExtResource("4_op81c")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2, 0.01, 3)
 
 [node name="InitialResourcesPosition" type="Marker3D" parent="."]
@@ -73,4 +85,24 @@ offset_right = 64.0
 offset_bottom = 116.0
 text = "Madera:"
 
+[node name="RightGUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -245.0
+offset_bottom = 159.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="RightGUI"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "FPS: "
+horizontal_alignment = 2
+
+[connection signal="create_chunk" from="World/FloorChunks/FloorChunk_0_0" to="." method="_on_create_chunk"]
 [connection signal="locked_worker_signal" from="Player" to="." method="_on_player_locked_worker_signal"]

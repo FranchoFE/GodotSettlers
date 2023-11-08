@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://bd7ay02h7aeg0"]
+
+[ext_resource type="Script" path="res://scenes/floor_chunk.gd" id="1_n62ig"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dv7l8"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_er3ot"]
+albedo_color = Color(0, 0.243137, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_j5i78"]
+material = SubResource("StandardMaterial3D_er3ot")
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pvg6x"]
+size = Vector3(100, 1, 100)
+
+[node name="Floor_Chunks" type="Node3D"]
+script = ExtResource("1_n62ig")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_dv7l8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_j5i78")
+
+[node name="Area3D" type="Area3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.481432, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/Area3D"]
+shape = SubResource("BoxShape3D_pvg6x")
+
+[connection signal="body_entered" from="Floor/Area3D" to="." method="_on_area_3d_body_entered"]
