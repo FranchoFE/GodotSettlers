@@ -3,7 +3,6 @@ extends Node3D
 @export var first_one = false
 var tree_resource_scene = preload("res://scenes/tree_resource.tscn")
 var stone_resource_scene = preload("res://scenes/stone_resource.tscn")
-var floor_chunk_scene = preload("res://scenes/floor_chunks.tscn")
 
 signal create_chunk(i, j)
 
@@ -60,13 +59,7 @@ func _on_area_3d_body_entered(body):
 				if must_create_chunk:
 					print("Se emite la señal para crear el chunk ", i, " - ", j)
 					create_chunk.emit(i, j)
-	
-func _create_chunk(i, j):
-	print("Vamos a crear el chunk " + str(i) + ", " + str(j))	
-	# var chunk_scene_instance = chunck_scene.instantiate()
-	# chunk_scene_instance.name = "FloorChunk_" + str(i) + "_" + str(j)
-	# chunk_scene_instance.position = Vector3(i*100, 0, j*100)
-	# get_parent().add_child(chunk_scene_instance)
+					
 		
 func _exists_chunk(i, j):
 	for children in get_parent().get_children():
