@@ -35,7 +35,7 @@ func _change_draw_building_mode():
 	draw_building_mode = not draw_building_mode
 	if draw_building_mode:
 		if stones < 100 or wood < 200:
-			$AllGUIs.show_message("No tienes los recursos suficientes\npara crear una casa")
+			$GUI.show_message("No tienes los recursos suficientes\npara crear una casa")
 			draw_building_mode = false
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -47,7 +47,7 @@ func _change_draw_building_mode():
 
 
 func _on_player_locked_worker_signal(worker):
-	$AllGUIs.selected_worker(worker)
+	$GUI.selected_worker(worker)
 	
 		
 func add_resources(resources, resource_type):
@@ -55,7 +55,7 @@ func add_resources(resources, resource_type):
 		stones += resources
 	elif resource_type == "WOOD":
 		wood += resources
-	$AllGUIs.update_resources(stones, wood)
+	$GUI.update_resources(stones, wood)
 
 
 func _on_create_chunk(i, j):
@@ -106,7 +106,7 @@ func _build_new_building(pos: Vector3):
 	stones -= 100
 	wood -= 200
 	
-	$AllGUIs.update_resources(stones, wood)
+	$GUI.update_resources(stones, wood)
 
 	
 func _unhandled_key_input(event: InputEvent) -> void:
