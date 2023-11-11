@@ -12,14 +12,14 @@ func _process(delta):
 
 func selected_worker(worker):
 	if worker != null:
-		$GUI/ActionLabel.set_text("Seleccionado trabajador " + str(worker.name))
+		$DownGUI/ActionLabel.set_text("Seleccionado trabajador " + str(worker.name))
 	else:
-		$GUI/ActionLabel.set_text("Ningún trabajador seleccionado")
+		$DownGUI/ActionLabel.set_text("Ningún trabajador seleccionado")
 
 
 func update_resources(stones, wood):
-	$GUI/StoneLabel.text = "Piedra: " + str(stones)
-	$GUI/WoodLabel.text = "Madera: " + str(wood)
+	$GUI/StoneLabel.text = str(stones)
+	$GUI/WoodLabel.text = str(wood)
 	
 	
 func show_message(message):

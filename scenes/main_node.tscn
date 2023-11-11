@@ -50,6 +50,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.35012, 6.75261, 0)
 [node name="MainTownBuilding" parent="Buildings" instance=ExtResource("4_op81c")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2, 0.01, 3)
 
+[node name="Workers" type="Node3D" parent="."]
+
 [node name="InitialResourcesPosition" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.874209, 0, 3.80496)
 
@@ -58,39 +60,74 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -3.0
-offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_bb2uu")
 
 [node name="GUI" type="Control" parent="AllGUIs"]
-layout_mode = 3
-anchors_preset = 0
-offset_top = 2.0
-offset_right = 166.0
-offset_bottom = 205.0
-
-[node name="ActionLabel" type="Label" parent="AllGUIs/GUI"]
-layout_mode = 0
-offset_top = 9.0
-offset_right = 55.0
-offset_bottom = 35.0
-text = "-"
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 3.0
+offset_right = 83.0
+offset_bottom = -68.0
+grow_vertical = 2
 
 [node name="StoneLabel" type="Label" parent="AllGUIs/GUI"]
 layout_mode = 1
-offset_top = 50.0
-offset_right = 55.0
-offset_bottom = 76.0
+anchors_preset = -1
+anchor_left = 0.228916
+anchor_top = 0.122297
+anchor_right = 0.891566
+anchor_bottom = 0.167358
+grow_horizontal = 0
+grow_vertical = 2
+text = "0"
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="AllGUIs/GUI/StoneLabel"]
+layout_mode = 1
+offset_left = -17.0
+offset_top = -21.0
+offset_right = 38.0
+offset_bottom = 5.0
 text = "Piedra:"
 
 [node name="WoodLabel" type="Label" parent="AllGUIs/GUI"]
 layout_mode = 1
-offset_top = 90.0
-offset_right = 64.0
-offset_bottom = 116.0
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -65.0
+offset_top = -154.0
+offset_right = -10.0
+offset_bottom = -128.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="Label" type="Label" parent="AllGUIs/GUI/WoodLabel"]
+layout_mode = 1
+offset_left = -16.0
+offset_top = -23.0
+offset_right = 48.0
+offset_bottom = 3.0
 text = "Madera:"
+
+[node name="ColorRect" type="ColorRect" parent="AllGUIs/GUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.578698, 0.300179, 0.313726)
+metadata/_edit_lock_ = true
 
 [node name="RightGUI" type="Control" parent="AllGUIs"]
 layout_mode = 1
@@ -151,10 +188,38 @@ offset_top = -41.0
 offset_bottom = 41.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.482353, 0.482353, 0.482353, 0.345098)
+color = Color(0.482353, 0.482353, 0.482353, 0.313726)
 
 [node name="DisappearTimer" type="Timer" parent="AllGUIs/CentralGUI"]
 one_shot = true
+
+[node name="DownGUI" type="Control" parent="AllGUIs"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="AllGUIs/DownGUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.578698, 0.300179, 0.313726)
+metadata/_edit_lock_ = true
+
+[node name="ActionLabel" type="Label" parent="AllGUIs/DownGUI"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 24.0
+offset_right = 592.0
+offset_bottom = 50.0
+text = "-"
 
 [connection signal="locked_worker_signal" from="Player" to="." method="_on_player_locked_worker_signal"]
 [connection signal="timeout" from="AllGUIs/CentralGUI/DisappearTimer" to="AllGUIs" method="_on_disappear_timer_timeout"]

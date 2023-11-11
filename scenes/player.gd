@@ -6,6 +6,7 @@ signal locked_worker_signal(worker)
 @export var JUMP_SPEED: float = 35.0
 var mSelected_worker = null
 var mLocked_worker = null
+var mActual_resource = null
 
 
 func _physics_process(delta) -> void:
@@ -51,7 +52,7 @@ func get_camera_relative_input() -> Vector3:
 	if Input.is_action_just_pressed("lock"):
 		_lock_worker(mSelected_worker)
 	if Input.is_action_just_pressed("work"):
-		_send_worker_to_work(mLocked_worker)
+		_send_worker_to_work(mLocked_worker, mActual_resource)
 	if Input.is_key_pressed(KEY_KP_ADD) or Input.is_key_pressed(KEY_EQUAL):
 		MOVE_SPEED = clamp(MOVE_SPEED + .5, 0, 9999)
 	if Input.is_key_pressed(KEY_KP_SUBTRACT) or Input.is_key_pressed(KEY_MINUS):
@@ -75,20 +76,26 @@ func _lock_worker(worker_to_lock):
 	locked_worker_signal.emit(mLocked_worker)
 	
 
-func _send_worker_to_work(worker):
+func _send_worker_to_work(worker, resource):
 	if worker != null:
-		print("Se manda a trabajar al trabajador ", worker.name)
-		var position_to_work = position
-		position_to_work.y = 0.5
-		worker.go_to_work(position_to_work)
+		print("Se manda a trabajar al trabajador ", worker.name, " al sitio ", resource)
+		worker.go_to_work(resource)
 	else:
 		print("No se puede mandar a nadie a trabajar porque no hay trabajador seleccionado")
 
 
+func set_actual_resource(resource):
+	print("Estableciendo recurso actual = ", resource)
+	mActual_resource = resource
+
+
 func _on_resources_detector_body_entered(body):
+	print("colisión del player")
 	if body.has_meta("worker"):
 		print("Colisión detectada con el trabajador ", body.name)
 		mSelected_worker = body
+	elif body.has_meta("resource"):
+		print("Colisión detectada con un recurso de tipo", body.mResource_type)
 	else:
 		print("Colisión detectada con " + body.name + " por parte de " + name)
 

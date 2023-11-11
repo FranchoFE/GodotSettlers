@@ -21,6 +21,7 @@ func create_children():
 	for i in range(random.randi_range(5, 10)):
 		instance = tree_resource_scene.instantiate()
 		add_child(instance)
+		instance.set_meta("resource", true)
 		instance.mResource_type = "WOOD"
 		instance.global_scale(Vector3.ONE * 3)
 		var pos_x = random.randi_range(-50, 50)
@@ -35,6 +36,7 @@ func create_children():
 	for i in range(random.randi_range(5, 10)):
 		instance = stone_resource_scene.instantiate()
 		add_child(instance)
+		instance.set_meta("resource", true)
 		instance.mResource_type = "STONE"
 		instance.global_scale(Vector3.ONE * 3)
 		var pos_x = random.randi_range(-50, 50)

@@ -1,6 +1,5 @@
 extends Node
 
-var worker_scene = preload("res://scenes/worker_resource.tscn")
 var chunk_scene = preload("res://scenes/floor_chunks.tscn")
 var building_scene = preload("res://scenes/main_town_building.tscn")
 
@@ -16,11 +15,12 @@ func _ready():
 func _process(delta):
 	# Se crea un nuevo recurso	
 	if Input.is_action_just_pressed("new resource"):
-		var instance = worker_scene.instantiate()
-		# instance.global_scale(Vector3.ONE * 3)
-		instance.position = $InitialResourcesPosition.global_position
-		instance.position.y = 0.5
-		add_child(instance)
+		var nearest_building = _find_nearest_building_to_player()
+		var instance = nearest_building.create_new_worker()
+		if instance != null:
+			$Workers.add_child(instance)
+		else:
+			print("No se ha podido crear el trabajador")
 	elif Input.is_action_just_pressed("new building"):
 		_change_draw_building_mode()
 	elif Input.is_action_just_pressed("select_action"):
@@ -32,7 +32,6 @@ func _process(delta):
 
 
 func _change_draw_building_mode():
-	
 	draw_building_mode = not draw_building_mode
 	if draw_building_mode:
 		if stones < 100 or wood < 200:
@@ -99,6 +98,8 @@ func _draw_next_building_position():
 func _build_new_building(pos: Vector3):
 	var instance = building_scene.instantiate()
 	$Buildings.add_child(instance)
+	var building_name = "Building_" + str($Buildings.get_child_count())
+	instance.name = building_name
 	instance.position = pos
 	instance.global_scale(Vector3.ONE * 3)
 	
@@ -118,4 +119,17 @@ func _unhandled_key_input(event: InputEvent) -> void:
 				vp.debug_draw = (vp.debug_draw + 1 ) % 4
 				get_viewport().set_input_as_handled()
 
-
+func _find_nearest_building_to_player():
+	var min_distance_found: float = -1.0
+	var min_building_found = null
+	for building in $Buildings.get_children():
+		var player_position: Vector3 = $Player.global_position
+		var building_position: Vector3 = building.global_position
+		
+		var actual_distance = player_position.distance_to(building_position)
+		if min_distance_found < 0 or min_distance_found > actual_distance:
+			min_building_found = building
+			min_distance_found = actual_distance
+	
+	print("El edificio más cercano encontrado es ", min_building_found.name)		
+	return min_building_found
