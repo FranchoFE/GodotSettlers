@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://djq1axt168wia"]
+[gd_scene load_steps=7 format=3 uid="uid://djq1axt168wia"]
 
 [ext_resource type="Script" path="res://scenes/stone_resource.gd" id="1_djno6"]
 [ext_resource type="ArrayMesh" uid="uid://c1fuiwy3ubqcp" path="res://assets/tree_thin_dark.obj" id="2_30tj2"]
@@ -8,6 +8,27 @@ size = Vector3(0.607775, 0.81672, 0.641043)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oeqnq"]
 size = Vector3(0.445881, 0.767607, 0.573009)
+
+[sub_resource type="Animation" id="Animation_wipl8"]
+resource_name = "fall_down"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody3D/CollisionShape3D/TreeThinDark:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 1.39626)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f6xil"]
+_data = {
+"fall_down": SubResource("Animation_wipl8")
+}
 
 [node name="TreeResource" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -34,6 +55,11 @@ skeleton = NodePath("../../..")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f6xil")
+}
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

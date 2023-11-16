@@ -13,7 +13,7 @@ func _ready():
 	random.randomize()
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if target != null:
 		velocity = position.direction_to(target) * speed
 		look_at(target)

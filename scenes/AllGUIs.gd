@@ -2,11 +2,11 @@ extends Control
 
 
 func _ready():
-	update_resources(get_parent().stones, get_parent().wood)
+	update_resources(get_parent().stones_in_town, get_parent().wood_in_town)
 	selected_worker(null)
 
 
-func _process(delta):
+func _process(_delta):
 	$RightGUI/Label.text = "FPS: " + str(roundi(Engine.get_frames_per_second()))
 	
 

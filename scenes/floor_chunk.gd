@@ -3,6 +3,7 @@ extends Node3D
 @export var first_one = false
 var tree_resource_scene = preload("res://scenes/tree_resource.tscn")
 var stone_resource_scene = preload("res://scenes/stone_resource.tscn")
+const CONST = preload("res://scenes/constants.gd")
 
 signal create_chunk(i, j)
 
@@ -17,36 +18,24 @@ func create_children():
 	random.randomize()
 
 	var instance: Node3D = null
-	
-	for i in range(random.randi_range(5, 10)):
-		instance = tree_resource_scene.instantiate()
-		add_child(instance)
-		instance.set_meta("resource", true)
-		instance.mResource_type = "WOOD"
-		instance.global_scale(Vector3.ONE * 3)
-		var pos_x = random.randi_range(-50, 50)
-		var pos_z = random.randi_range(-50, 50)
-		
-		while first_one and abs(pos_x) < 10 and abs(pos_z) < 10:
-			pos_x = random.randi_range(-50, 50)
-			pos_z = random.randi_range(-50, 50)
 			
-		instance.position = Vector3(pos_x, 1.5, pos_z)
-		
-	for i in range(random.randi_range(5, 10)):
-		instance = stone_resource_scene.instantiate()
-		add_child(instance)
-		instance.set_meta("resource", true)
-		instance.mResource_type = "STONE"
-		instance.global_scale(Vector3.ONE * 3)
-		var pos_x = random.randi_range(-50, 50)
-		var pos_z = random.randi_range(-50, 50)
-		
-		while first_one and abs(pos_x) < 10 and abs(pos_z) < 10:
-			pos_x = random.randi_range(-50, 50)
-			pos_z = random.randi_range(-50, 50)
+	for resource_type in [CONST.STONE, CONST.WOOD]:
+		for i in range(random.randi_range(5, 10)):
+			instance = stone_resource_scene.instantiate()
+			instance.mResource_type = resource_type
+			instance.name = CONST.STONE + "_" + str(i) + "_" + self.name
+			print("Establecido stone al recurso ", instance.name)
+			add_child(instance)
+			instance.set_meta("resource", true)
+			instance.global_scale(Vector3.ONE * 3)
+			var pos_x = random.randi_range(-50, 50)
+			var pos_z = random.randi_range(-50, 50)
 			
-		instance.position = Vector3(pos_x, 1.5, pos_z)
+			while first_one and abs(pos_x) < 10 and abs(pos_z) < 10:
+				pos_x = random.randi_range(-50, 50)
+				pos_z = random.randi_range(-50, 50)
+				
+			instance.position = Vector3(pos_x, 2, pos_z)
 
 
 func _on_area_3d_body_entered(body):

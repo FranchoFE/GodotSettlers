@@ -9,15 +9,14 @@ var mMax_workers = 5
 func _on_area_3d_body_entered(body):
 	print("Ha entrado ", body.name, " en la casa")
 	if body.has_meta("worker"):
-		var resources = body.give_resources_to_town()
-		
+		body.give_resources_to_town()
 
 
 func _on_area_3d_body_exited(body):
 	print("Ha salido ", body.name, " de la casa")
 	
 	
-func create_new_worker():
+func create_new_worker():	
 	if mWorkers.size() >= mMax_workers:
 		return null
 	

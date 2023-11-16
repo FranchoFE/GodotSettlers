@@ -2,9 +2,10 @@ extends Node
 
 var chunk_scene = preload("res://scenes/floor_chunks.tscn")
 var building_scene = preload("res://scenes/main_town_building.tscn")
+const CONST = preload("res://scenes/constants.gd")
 
-var stones: int = 500
-var wood: int = 500
+var stones_in_town: int = 500
+var wood_in_town: int = 500
 var draw_building_mode: bool = false
 
 
@@ -12,7 +13,7 @@ func _ready():
 	_on_create_chunk(0, 0)
 
 
-func _process(delta):
+func _process(_delta):
 	# Se crea un nuevo recurso	
 	if Input.is_action_just_pressed("new resource"):
 		var nearest_building = _find_nearest_building_to_player()
@@ -34,7 +35,7 @@ func _process(delta):
 func _change_draw_building_mode():
 	draw_building_mode = not draw_building_mode
 	if draw_building_mode:
-		if stones < 100 or wood < 200:
+		if stones_in_town < 100 or wood_in_town < 200:
 			$GUI.show_message("No tienes los recursos suficientes\npara crear una casa")
 			draw_building_mode = false
 		else:
@@ -51,11 +52,11 @@ func _on_player_locked_worker_signal(worker):
 	
 		
 func add_resources(resources, resource_type):
-	if resource_type == "STONE":
-		stones += resources
-	elif resource_type == "WOOD":
-		wood += resources
-	$GUI.update_resources(stones, wood)
+	if resource_type == CONST.STONE:
+		stones_in_town += resources
+	elif resource_type == CONST.WOOD:
+		wood_in_town += resources
+	$GUI.update_resources(stones_in_town, wood_in_town)
 
 
 func _on_create_chunk(i, j):
@@ -103,10 +104,10 @@ func _build_new_building(pos: Vector3):
 	instance.position = pos
 	instance.global_scale(Vector3.ONE * 3)
 	
-	stones -= 100
-	wood -= 200
+	stones_in_town -= 100
+	wood_in_town -= 200
 	
-	$GUI.update_resources(stones, wood)
+	$GUI.update_resources(stones_in_town, wood_in_town)
 
 	
 func _unhandled_key_input(event: InputEvent) -> void:

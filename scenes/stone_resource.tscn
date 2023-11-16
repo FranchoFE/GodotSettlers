@@ -2,14 +2,13 @@
 
 [ext_resource type="Script" path="res://scenes/stone_resource.gd" id="1_aemh4"]
 [ext_resource type="ArrayMesh" uid="uid://b7ug4sb1ug6m5" path="res://assets/stone_tallB.obj" id="2_mhuyt"]
+[ext_resource type="ArrayMesh" uid="uid://c1fuiwy3ubqcp" path="res://assets/tree_thin_dark.obj" id="3_fk0o2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_25ai5"]
 size = Vector3(0.607775, 0.81672, 0.641043)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oeqnq"]
 size = Vector3(0.445881, 0.767607, 0.573009)
-
-[sub_resource type="BoxMesh" id="BoxMesh_i4yjg"]
 
 [node name="StoneResource" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -29,14 +28,14 @@ shape = SubResource("BoxShape3D_25ai5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.134807, -0.0100298)
 shape = SubResource("BoxShape3D_oeqnq")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.272645, 0)
-visible = false
-mesh = SubResource("BoxMesh_i4yjg")
-
-[node name="StoneTallB" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+[node name="STONE" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.00578731, -0.357018, 0.00763852)
 mesh = ExtResource("2_mhuyt")
+skeleton = NodePath("../../..")
+
+[node name="WOOD" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0417175, -0.366278, 0.0541969)
+mesh = ExtResource("3_fk0o2")
 skeleton = NodePath("../../..")
 
 [node name="Timer" type="Timer" parent="."]
