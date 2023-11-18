@@ -1,7 +1,5 @@
 extends Node3D
 
-const CONST = preload("res://scenes/constants.gd")
-
 @export var mResource_type: String
 var mPending_elements: int = 5
 var mWait_time_timer = 1
@@ -47,7 +45,6 @@ func _on_area_3d_body_exited(body):
 		
 	elif body.has_meta("player"):
 		body.set_actual_resource(null)
-		_goodby_animation()
 
 
 func _on_timer_timeout():
@@ -72,7 +69,7 @@ func _on_timer_timeout():
 		
 func _goodby_animation():
 	var tween = get_tree().create_tween()
-	if mResource_type == CONST.WOOD:
+	if mResource_type == Constants.WOOD:
 		tween.tween_property($StaticBody3D/CollisionShape3D/WOOD, "rotation", Vector3(0, 0, PI/2), 3)
 	else:
 		tween.tween_property($StaticBody3D/CollisionShape3D/STONE, "scale", Vector3(), 3)

@@ -58,3 +58,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.874209, 0, 3.80496)
 [node name="GUI" parent="." instance=ExtResource("4_kvuva")]
 
 [connection signal="locked_worker_signal" from="Player" to="." method="_on_player_locked_worker_signal"]
+[connection signal="player_near_home" from="Buildings/MainTownBuilding" to="GUI" method="_on_main_town_building_player_near_home"]

@@ -2,6 +2,8 @@ extends Node3D
 
 var worker_scene = preload("res://scenes/worker_resource.tscn")
 
+signal player_near_home
+
 var mWorkers = []
 var mMax_workers = 5
 
@@ -10,7 +12,9 @@ func _on_area_3d_body_entered(body):
 	print("Ha entrado ", body.name, " en la casa")
 	if body.has_meta("worker"):
 		body.give_resources_to_town()
-
+	elif body.name == "Player":
+		player_near_home.emit()
+		
 
 func _on_area_3d_body_exited(body):
 	print("Ha salido ", body.name, " de la casa")

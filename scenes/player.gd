@@ -3,7 +3,7 @@ extends CharacterBody3D
 signal locked_worker_signal(worker)
 
 @export var MOVE_SPEED: float = 20.0
-@export var JUMP_SPEED: float = 35.0
+@export var JUMP_SPEED: float = 15.0
 var mSelected_worker = null
 var mLocked_worker = null
 var mActual_resource = null
@@ -30,6 +30,7 @@ func _physics_process(delta) -> void:
 			$SophiaSkin.idle()
 	
 	move_and_slide()
+	# print("Player Position = " + vector3ToString(self.global_position))
 	
 func vector3ToString(vector):
 	return "" + str(vector.x) + ", " + str(vector.y) + ", " + str(vector.z) 

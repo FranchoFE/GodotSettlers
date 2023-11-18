@@ -2,7 +2,7 @@ extends Control
 
 
 func _ready():
-	update_resources(get_parent().stones_in_town, get_parent().wood_in_town)
+	update_resources(get_parent().stone_in_town, get_parent().wood_in_town)
 	selected_worker(null)
 
 
@@ -30,3 +30,7 @@ func show_message(message):
 
 func _on_disappear_timer_timeout():
 	$CentralGUI/Label.visible = false
+
+
+func _on_main_town_building_player_near_home():
+	show_message("Pulsa E para entrar en la casa")

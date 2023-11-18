@@ -1,9 +1,7 @@
 extends Node3D
 
 @export var first_one = false
-var tree_resource_scene = preload("res://scenes/tree_resource.tscn")
 var stone_resource_scene = preload("res://scenes/stone_resource.tscn")
-const CONST = preload("res://scenes/constants.gd")
 
 signal create_chunk(i, j)
 
@@ -19,12 +17,12 @@ func create_children():
 
 	var instance: Node3D = null
 			
-	for resource_type in [CONST.STONE, CONST.WOOD]:
+	for resource_type in [Constants.STONE, Constants.WOOD]:
 		for i in range(random.randi_range(5, 10)):
 			instance = stone_resource_scene.instantiate()
 			instance.mResource_type = resource_type
-			instance.name = CONST.STONE + "_" + str(i) + "_" + self.name
-			print("Establecido stone al recurso ", instance.name)
+			instance.name = resource_type + "_" + str(i) + "_" + self.name
+			print("Establecido ", resource_type, " al recurso ", instance.name)
 			add_child(instance)
 			instance.set_meta("resource", true)
 			instance.global_scale(Vector3.ONE * 3)
@@ -32,9 +30,11 @@ func create_children():
 			var pos_z = random.randi_range(-50, 50)
 			
 			while first_one and abs(pos_x) < 10 and abs(pos_z) < 10:
+				print("Ojo. Estamos en el first_one floor_chunk y la posición que ha salido es " + str(pos_x) + ", " + str(pos_z))
 				pos_x = random.randi_range(-50, 50)
 				pos_z = random.randi_range(-50, 50)
-				
+			
+			print("Recurso ", instance.name," creado en " + str(pos_x) + ", " + str(pos_z))
 			instance.position = Vector3(pos_x, 2, pos_z)
 
 
