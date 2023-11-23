@@ -85,6 +85,7 @@ func _on_create_chunk(i, j):
 	print("Recibida señal para crear el floor chunk ", i, " - ", j)
 	var chunk_scene_instance = chunk_scene.instantiate()
 	chunk_scene_instance.name = "FloorChunk_" + str(i) + "_" + str(j)
+	chunk_scene_instance.seed_id = abs(i*Constants.SEED_CHUNK_I + j*Constants.SEED_CHUNK_J + Constants.SEED)
 	chunk_scene_instance.first_one = true
 	chunk_scene_instance.position = Vector3(i*100, -0.5, j*100)
 	
